@@ -36,6 +36,256 @@ export type JournalPost = {
   date: string;
 };
 
+export type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+};
+
+export type TrustBadge = {
+  title: string;
+  text: string;
+};
+
+export type FabricGuide = {
+  fabric: string;
+  title: string;
+  description: string;
+  care: string[];
+};
+
+export type PolicyItem = {
+  title: string;
+  text: string;
+};
+
+export const brandStory = {
+  eyebrow: "The House",
+  title: "Drape is built around occasionwear that feels collectible, not disposable.",
+  intro:
+    "The house focuses on sarees, bridal silhouettes, and finishing pieces shaped by Indian textile traditions and a quieter, premium visual language.",
+  pillars: [
+    "Warm maroon, ivory, and muted gold create a recognizable Drape signature across every touchpoint.",
+    "Each product story is written around fabric, occasion, and styling practicality so clients can shop with confidence.",
+    "Support pages, concierge guidance, and transparent policies are treated as part of the luxury experience.",
+  ],
+};
+
+export const trustBadges: TrustBadge[] = [
+  {
+    title: "Authentic Fabric Sourcing",
+    text: "Silk, tissue, brocade, and occasion blends are selected for drape, tone, and ceremonial finish.",
+  },
+  {
+    title: "Stylist-Led Guidance",
+    text: "Blouse, jewelry, and event recommendations are available before purchase for bridal and occasion orders.",
+  },
+  {
+    title: "Worldwide Delivery",
+    text: "Tracked domestic and international dispatch support is available for time-sensitive celebrations.",
+  },
+  {
+    title: "Trusted Order Care",
+    text: "Returns, exchanges, and support queries follow a clear documented review process.",
+  },
+];
+
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "The saree arrived exactly as expected, with a richer finish in person. Drape felt like a boutique purchase from consultation to delivery.",
+    name: "Rhea Menon",
+    role: "Bride, Kochi",
+  },
+  {
+    quote:
+      "I reached out for blouse advice before ordering and got styling suggestions that made the entire look feel considered.",
+    name: "Nikita Shah",
+    role: "Reception Client, Mumbai",
+  },
+  {
+    quote:
+      "The visuals drew me in, but the care notes, policy clarity, and product detail page are what made me comfortable ordering online.",
+    name: "Aarav Khanna",
+    role: "Gift Buyer, Bengaluru",
+  },
+];
+
+export const socialProof = [
+  { value: "2,400+", label: "Private clients styled" },
+  { value: "4.8/5", label: "Average verified rating" },
+  { value: "48 hrs", label: "Concierge response window" },
+  { value: "18", label: "Cities delivered this season" },
+];
+
+export const fabricGuides: FabricGuide[] = [
+  {
+    fabric: "silk",
+    title: "Silk Occasion Drape",
+    description:
+      "Traditional silk with a fluid ceremonial fall, luminous body, and enough structure to hold pleats cleanly through long events.",
+    care: [
+      "Dry clean only after wear.",
+      "Store folded in breathable muslin.",
+      "Steam lightly from the reverse side.",
+    ],
+  },
+  {
+    fabric: "banarasi silk",
+    title: "Banarasi Silk Brocade",
+    description:
+      "Heavier woven silk with zari-rich depth, ideal for weddings, receptions, and heirloom styling moments.",
+    care: [
+      "Avoid direct perfume on zari areas.",
+      "Refold along different lines after each wear.",
+      "Use padded storage for long-term preservation.",
+    ],
+  },
+  {
+    fabric: "soft silk",
+    title: "Soft Silk Festive Weave",
+    description:
+      "A lighter silk finish for festive dressing, chosen for comfort, movement, and all-evening wearability.",
+    care: [
+      "Spot clean minor marks immediately.",
+      "Hang briefly before folding after events.",
+      "Keep away from rough jewelry edges.",
+    ],
+  },
+  {
+    fabric: "silk tissue",
+    title: "Silk Tissue Glow",
+    description:
+      "A soft shimmer fabric with a delicate surface designed for receptions and jewelry-forward styling.",
+    care: [
+      "Handle with dry, clean hands.",
+      "Avoid heavy pinning through the body.",
+      "Store flat between soft layers.",
+    ],
+  },
+  {
+    fabric: "silk blend",
+    title: "Ceremonial Silk Blend",
+    description:
+      "Balanced for comfort and finish, this blend offers a softer hand-feel while retaining occasionwear polish.",
+    care: [
+      "Professional dry clean recommended.",
+      "Use low steam before draping.",
+      "Do not store in plastic covers.",
+    ],
+  },
+  {
+    fabric: "brocade silk",
+    title: "Brocade Silk Bridal Finish",
+    description:
+      "Dense ceremonial silk with a structured body, designed for bridal portraits, formal rituals, and collectible wardrobe pieces.",
+    care: [
+      "Fold with tissue along zari-heavy panels.",
+      "Keep away from prolonged sunlight.",
+      "Air the piece after each use before storing.",
+    ],
+  },
+  {
+    fabric: "raw silk",
+    title: "Raw Silk Structure",
+    description:
+      "A firmer silk hand-feel that holds blouse shape beautifully and pairs well with statement jewelry.",
+    care: [
+      "Dry clean only.",
+      "Use padded hangers for blouses.",
+      "Protect the neckline from cosmetics and perfume.",
+    ],
+  },
+  {
+    fabric: "cotton silk",
+    title: "Cotton Silk Ease",
+    description:
+      "Soft tailoring fabric with breathable comfort and a refined festive finish suited to long ceremonies.",
+    care: [
+      "Steam lightly before wear.",
+      "Store in a breathable cover.",
+      "Use gentle professional cleaning only.",
+    ],
+  },
+  {
+    fabric: "leather",
+    title: "Polished Leather Finish",
+    description:
+      "Structured accessory leather with a smooth premium finish selected for event dressing and repeat wear.",
+    care: [
+      "Wipe with a soft dry cloth after use.",
+      "Store stuffed to maintain shape.",
+      "Avoid moisture and abrasive surfaces.",
+    ],
+  },
+];
+
+export const shippingPolicy: PolicyItem[] = [
+  {
+    title: "Ready-to-Ship Pieces",
+    text: "Most in-stock sarees, blouses, and accessories dispatch within 3 to 5 business days after order confirmation.",
+  },
+  {
+    title: "Custom Finishing",
+    text: "Blouse tailoring, fall edging, pico finishing, and bridal adjustments add 4 to 7 business days depending on complexity.",
+  },
+  {
+    title: "Priority Event Support",
+    text: "If your order is for a wedding or date-specific event, our team can advise on the fastest serviceable dispatch option before purchase.",
+  },
+  {
+    title: "International Delivery",
+    text: "International orders receive timeline estimates at confirmation, with duties or import fees remaining the responsibility of the recipient unless stated otherwise.",
+  },
+];
+
+export const returnsPolicy: PolicyItem[] = [
+  {
+    title: "Return Window",
+    text: "Eligible ready-to-ship items may be requested for return within 48 hours of delivery and must be shipped back promptly after approval.",
+  },
+  {
+    title: "Condition Review",
+    text: "Items must be unworn, unaltered, and returned with original tags, packaging, and no fragrance, makeup, or pin marks.",
+  },
+  {
+    title: "Non-Returnable Orders",
+    text: "Custom blouse tailoring, bridal customization, altered sarees, intimate accessories, and final-sale items are not eligible for return.",
+  },
+  {
+    title: "Exchange Support",
+    text: "Where stock allows, approved returns can be converted into an exchange or store credit after quality review.",
+  },
+];
+
+export const faqHighlights = [
+  {
+    question: "Do you offer custom blouse and bridal styling guidance?",
+    answer:
+      "Yes. Drape offers pre-purchase support for blouse pairings, jewelry balance, event appropriateness, and bridal wardrobe planning through private consultations.",
+  },
+  {
+    question: "How long does shipping usually take?",
+    answer:
+      "Most ready-to-ship orders dispatch within 3 to 5 business days. Custom blouse work, fall finishing, or bridal preparation may extend the timeline.",
+  },
+  {
+    question: "Can I request fabric and color advice before ordering?",
+    answer:
+      "Absolutely. Clients often reach out for skin-tone guidance, event-specific recommendations, and help choosing between silk, tissue, and brocade finishes.",
+  },
+  {
+    question: "Do you accept returns on occasionwear?",
+    answer:
+      "Eligible ready-to-ship pieces may be reviewed for return when they are unworn and reported within the stated return window. Custom and altered items are excluded.",
+  },
+  {
+    question: "Will the blouse shown in the image be included?",
+    answer:
+      "Product pages clearly indicate whether a blouse piece, styled blouse suggestion, or saree-only option applies, and our team can confirm before checkout.",
+  },
+];
+
 export const utilityLinks: NavItem[] = [
   { label: "Orders", href: "/contact" },
   { label: "Appointments", href: "/contact" },
@@ -380,24 +630,11 @@ export const journalPosts: JournalPost[] = [
   },
 ];
 
-export const faqs = [
-  {
-    question: "Do you offer custom blouse and bridal styling guidance?",
-    answer: "Yes. Drape offers styling assistance for bridal, festive, and occasion dressing through scheduled consultations.",
-  },
-  {
-    question: "How long does shipping usually take?",
-    answer: "Standard shipping timelines vary by region, but most ready-to-ship orders dispatch within 3 to 5 business days.",
-  },
-  {
-    question: "Can I request fabric and color advice before ordering?",
-    answer: "Absolutely. We encourage clients to reach out for drape, tone, and event-specific recommendations before purchase.",
-  },
-  {
-    question: "Do you accept returns on occasionwear?",
-    answer: "Eligible returns are accepted within the stated return window for unworn items in original condition, subject to policy terms.",
-  },
-];
+export const faqs = faqHighlights;
+
+export function getFabricGuide(fabric: string) {
+  return fabricGuides.find((guide) => guide.fabric === fabric.toLowerCase());
+}
 
 export function getCategory(slug: string) {
   return categories.find((category) => category.slug === slug);

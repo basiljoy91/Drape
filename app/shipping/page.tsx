@@ -1,5 +1,13 @@
 import { ContentPanel, PageHero, SectionTitle } from "../../components/brand-ui";
 import { SiteFrame } from "../../components/site-frame";
+import { createMetadata } from "../../lib/metadata";
+import { shippingPolicy, trustBadges } from "../../lib/site-data";
+
+export const metadata = createMetadata({
+  title: "Shipping",
+  description: "Review Drape shipping timelines, dispatch guidance, and delivery information.",
+  path: "/shipping",
+});
 
 export default function ShippingPage() {
   return (
@@ -7,24 +15,23 @@ export default function ShippingPage() {
       <PageHero
         eyebrow="Shipping"
         title="Delivery timelines and dispatch expectations."
-        description="A complete ecommerce storefront should present shipping details clearly before checkout."
+        description="Clear shipping guidance for ready pieces, custom finishing, bridal timelines, and international orders."
       />
 
       <section className="shell faq-list">
-        <ContentPanel>
-          <SectionTitle
-            eyebrow="Dispatch"
-            title="Processing and dispatch"
-            description="Ready-to-ship orders typically dispatch within 3 to 5 business days. Made-to-order or bridal pieces may require longer preparation windows."
-          />
-        </ContentPanel>
-        <ContentPanel>
-          <SectionTitle
-            eyebrow="Delivery"
-            title="Domestic and international delivery"
-            description="Shipping timelines vary by region. Tracking is provided when available, and premium support can help with urgent occasionwear timelines."
-          />
-        </ContentPanel>
+        {shippingPolicy.map((item) => (
+          <ContentPanel key={item.title}>
+            <SectionTitle eyebrow="Shipping" title={item.title} description={item.text} />
+          </ContentPanel>
+        ))}
+      </section>
+
+      <section className="shell info-grid">
+        {trustBadges.slice(1, 3).map((badge) => (
+          <ContentPanel key={badge.title}>
+            <SectionTitle eyebrow="Service" title={badge.title} description={badge.text} />
+          </ContentPanel>
+        ))}
       </section>
     </SiteFrame>
   );

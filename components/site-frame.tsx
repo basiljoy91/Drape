@@ -7,7 +7,7 @@ export function SiteFrame({ children }: { children: ReactNode }) {
     <SiteChrome>
       <UtilityBar links={utilityLinks} />
       <SiteHeader navigation={mainNavigation} />
-      {children}
+      <div role="presentation">{children}</div>
     </SiteChrome>
   );
 }

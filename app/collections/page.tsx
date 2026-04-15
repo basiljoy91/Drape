@@ -1,7 +1,14 @@
 import { CategoryCard, PageHero, SectionTitle } from "../../components/brand-ui";
 import { ProductBrowser } from "../../components/product-browser";
 import { SiteFrame } from "../../components/site-frame";
+import { createMetadata } from "../../lib/metadata";
 import { categories, products } from "../../lib/site-data";
+
+export const metadata = createMetadata({
+  title: "Collections",
+  description: "Browse the full Drape collections across sarees, bridal, blouses, menswear, and accessories.",
+  path: "/collections",
+});
 
 export default function CollectionsPage() {
   return (

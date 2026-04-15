@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { NewsletterSignupForm } from "./newsletter-signup-form";
 import type { NavItem } from "../lib/site-data";
 
 export function UtilityBar({ links }: { links: NavItem[] }) {
@@ -61,7 +62,7 @@ export function SiteHeader({ navigation }: { navigation: NavItem[] }) {
 
 export function SiteChrome({ children }: { children: ReactNode }) {
   return (
-    <main className="brand-page">
+    <main className="brand-page" id="main-content">
       {children}
       <SiteFooter />
     </main>
@@ -202,13 +203,7 @@ export function NewsletterCard() {
         title="Join the Drape circle"
         description="Receive first access to bridal edits, occasion capsules, and limited seasonal launches."
       />
-      <form className="newsletter-form">
-        <FormField label="Email Address" type="email" placeholder="Enter your email" />
-        <FormField label="Occasion" placeholder="Wedding, festive, evening..." />
-        <button type="submit" className="cta-button">
-          Request Access
-        </button>
-      </form>
+      <NewsletterSignupForm />
     </section>
   );
 }

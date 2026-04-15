@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Badge, ProductCard, SectionTitle } from "./brand-ui";
-import type { Product } from "../lib/site-data";
+import { getFabricGuide, trustBadges, type Product } from "../lib/site-data";
 
 type TabKey = "details" | "delivery" | "care";
 
@@ -15,17 +15,17 @@ function makeReviews(product: Product) {
     {
       name: "Ananya Rao",
       rating: 5,
-      text: `The ${product.title} looks even richer in person. The color and fall felt premium from the first drape.`,
+      text: `The ${product.title} felt exactly right for a family celebration. The tone, finish, and fall looked richer in person than on screen.`,
     },
     {
       name: "Meera Nair",
       rating: 5,
-      text: "The blouse guidance and styling support made the purchase feel boutique-level rather than transactional.",
+      text: "The blouse guidance and fabric notes gave me enough confidence to order online without second-guessing the purchase.",
     },
     {
       name: "Sanya Iyer",
       rating: 4,
-      text: "Beautiful finish and great event presence. Delivery support was especially helpful before my ceremony.",
+      text: "Beautiful finish and very polished packaging. Delivery support was especially helpful before my ceremony week.",
     },
   ];
 }
@@ -51,6 +51,7 @@ export function ProductDetailExperience({
   const [wishlist, setWishlist] = useState(false);
   const [recentItems, setRecentItems] = useState<Product[]>([]);
   const reviews = useMemo(() => makeReviews(product), [product]);
+  const fabricGuide = useMemo(() => getFabricGuide(product.fabric), [product.fabric]);
 
   useEffect(() => {
     const key = "drape_recently_viewed";
@@ -113,6 +114,13 @@ export function ProductDetailExperience({
                 <span className="product-tax-note">Inclusive of estimated taxes</span>
               </div>
               <p className="product-detail-text">{product.description}</p>
+              <div className="product-story-panel">
+                <p>
+                  Curated for <strong>{capitalize(product.occasion)}</strong> dressing in{" "}
+                  <strong>{capitalize(product.fabric)}</strong>, this piece is meant to photograph
+                  beautifully, drape cleanly, and hold its finish through long celebrations.
+                </p>
+              </div>
 
               <div className="variant-grid">
                 <div className="variant-block">
@@ -186,6 +194,15 @@ export function ProductDetailExperience({
                 <p>Need event help? <Link href="/contact">Book styling support</Link>.</p>
               </div>
 
+              <div className="trust-badge-row">
+                {trustBadges.slice(0, 3).map((badge) => (
+                  <article key={badge.title} className="mini-trust-card">
+                    <strong>{badge.title}</strong>
+                    <p>{badge.text}</p>
+                  </article>
+                ))}
+              </div>
+
               <div className="product-cta-row">
                 <button className="cta-button">Add to Cart</button>
                 <button
@@ -220,6 +237,10 @@ export function ProductDetailExperience({
                     <li key={detail}>{detail}</li>
                   ))}
                 </ul>
+                <p className="tab-support-text">
+                  Styled for {product.occasion} dressing with a {product.colors.join(", ")} palette
+                  and a finish chosen to feel elevated in person as well as on camera.
+                </p>
               </div>
             ) : null}
 
@@ -233,9 +254,22 @@ export function ProductDetailExperience({
 
             {activeTab === "care" ? (
               <div className="tab-panel">
-                <p>Dry clean recommended for premium occasionwear.</p>
-                <p>Store folded in muslin and keep away from direct light for long-term preservation.</p>
-                <p>Steam lightly before wear to restore drape and finish.</p>
+                {fabricGuide ? (
+                  <>
+                    <p>{fabricGuide.description}</p>
+                    <ul className="foundation-list">
+                      {fabricGuide.care.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <>
+                    <p>Dry clean recommended for premium occasionwear.</p>
+                    <p>Store folded in muslin and keep away from direct light for long-term preservation.</p>
+                    <p>Steam lightly before wear to restore drape and finish.</p>
+                  </>
+                )}
               </div>
             ) : null}
           </div>
@@ -245,8 +279,8 @@ export function ProductDetailExperience({
       <section className="shell products-section">
         <SectionTitle
           eyebrow="Reviews"
-          title="Customer feedback that supports the buying decision."
-          description="Reviews help premium fashion purchases feel less risky, especially for occasionwear."
+          title="Verified buyer notes"
+          description="Short, useful feedback from clients buying for weddings, receptions, and gifting."
         />
         <div className="testimonial-grid">
           {reviews.map((review) => (
@@ -254,6 +288,7 @@ export function ProductDetailExperience({
               <span className="review-stars">{"★".repeat(review.rating)}</span>
               <p className="testimonial-quote">“{review.text}”</p>
               <strong>{review.name}</strong>
+              <span>Verified client</span>
             </article>
           ))}
         </div>

@@ -12,7 +12,7 @@ import {
   ProductCard,
   SectionTitle,
 } from "./brand-ui";
-import { categories, journalPosts, products } from "../lib/site-data";
+import { brandStory, categories, journalPosts, products, socialProof, testimonials, trustBadges } from "../lib/site-data";
 
 const heroItems = [
   {
@@ -64,48 +64,12 @@ const newArrivals = [
   },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "The site finally feels like a premium boutique. The bridal edit and product storytelling make the collection feel valuable before checkout.",
-    name: "Rhea Menon",
-    role: "Bridal Client",
-  },
-  {
-    quote:
-      "Drape now reads like a real fashion house, not a template. The category flow, support pages, and homepage depth feel production-ready.",
-    name: "Nikita Shah",
-    role: "Styling Consultant",
-  },
-  {
-    quote:
-      "The warm maroon and cream language carries beautifully across every section. It feels focused, premium, and editorial.",
-    name: "Aarav Khanna",
-    role: "Brand Partner",
-  },
-];
-
 const galleryImages = [
   "/catalog/1.jpg",
   "/catalog/10.jpg",
   "/catalog/14.jpg",
   "/catalog/17.jpg",
   "/catalog/20.jpg",
-];
-
-const promises = [
-  {
-    title: "Assured Authenticity",
-    text: "Premium materials, rich finishing, and a brand presentation designed to feel trustworthy.",
-  },
-  {
-    title: "Shipping Support",
-    text: "Clear delivery and dispatch expectations for occasionwear timelines and important dates.",
-  },
-  {
-    title: "Concierge Care",
-    text: "Styling help, pre-purchase guidance, and support paths that keep the storefront usable.",
-  },
 ];
 
 export function AtelierHome() {
@@ -125,7 +89,7 @@ export function AtelierHome() {
           <SectionTitle
             eyebrow="Featured Collections"
             title="Signature edits"
-            description="Curated pieces from the house."
+            description="Core pieces from the house."
           />
         </div>
 
@@ -147,8 +111,8 @@ export function AtelierHome() {
       <section className="shell campaign-attraction">
         <div className="campaign-copy">
           <SectionTitle
-            eyebrow="Brand Attraction"
-            title="Campaign highlight"
+            eyebrow="Campaign"
+            title="A visual signature for the season"
             description="A branded moment between the shop edits."
           />
           <div className="showcase-copy">
@@ -245,19 +209,20 @@ export function AtelierHome() {
         </div>
         <ContentPanel>
           <SectionTitle
-            eyebrow="Craftsmanship"
-            title="Craftsmanship"
-            description="Silk, zari, finish, and drape."
+            eyebrow={brandStory.eyebrow}
+            title={brandStory.title}
+            description={brandStory.intro}
           />
+          <ul className="foundation-list">
+            {brandStory.pillars.map((pillar) => (
+              <li key={pillar}>{pillar}</li>
+            ))}
+          </ul>
         </ContentPanel>
         <ContentPanel>
-          <SectionTitle
-            eyebrow="Store Promise"
-            title="Store promise"
-            description="Authenticity, delivery, and concierge support."
-          />
+          <SectionTitle eyebrow="Trust" title="Why clients feel safe ordering online" description="Trust markers across fabric, support, and delivery." />
           <div className="promise-grid">
-            {promises.map((item) => (
+            {trustBadges.map((item) => (
               <article key={item.title} className="promise-card">
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
@@ -267,11 +232,20 @@ export function AtelierHome() {
         </ContentPanel>
       </section>
 
+      <section className="shell social-proof-strip">
+        {socialProof.map((item) => (
+          <article key={item.label} className="social-proof-card">
+            <strong>{item.value}</strong>
+            <span>{item.label}</span>
+          </article>
+        ))}
+      </section>
+
       <section className="shell testimonials-section">
         <SectionTitle
           eyebrow="Testimonials"
           title="Client notes"
-          description="A few words from shoppers."
+          description="Feedback from bridal, occasion, and gifting orders."
         />
         <div className="testimonial-grid">
           {testimonials.map((item) => (

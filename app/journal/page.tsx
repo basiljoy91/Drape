@@ -1,6 +1,13 @@
 import { JournalCard, PageHero, SectionTitle } from "../../components/brand-ui";
 import { SiteFrame } from "../../components/site-frame";
+import { createMetadata } from "../../lib/metadata";
 import { journalPosts } from "../../lib/site-data";
+
+export const metadata = createMetadata({
+  title: "Journal",
+  description: "Read Drape journal stories on styling, bridal wardrobes, occasionwear, and fashion direction.",
+  path: "/journal",
+});
 
 export default function JournalPage() {
   return (

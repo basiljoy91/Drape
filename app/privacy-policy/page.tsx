@@ -1,5 +1,12 @@
 import { ContentPanel, PageHero, SectionTitle } from "../../components/brand-ui";
 import { SiteFrame } from "../../components/site-frame";
+import { createMetadata } from "../../lib/metadata";
+
+export const metadata = createMetadata({
+  title: "Privacy Policy",
+  description: "Review how Drape handles personal information, communications, and customer data.",
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (
@@ -7,7 +14,7 @@ export default function PrivacyPolicyPage() {
       <PageHero
         eyebrow="Privacy Policy"
         title="How Drape handles personal information."
-        description="This page establishes baseline policy coverage for data collection, communication, and order-related information."
+        description="A plain-language summary of how customer details are collected, used, and protected across orders, consultations, and service requests."
       />
 
       <section className="shell faq-list">
@@ -15,14 +22,14 @@ export default function PrivacyPolicyPage() {
           <SectionTitle
             eyebrow="Collection"
             title="Information we collect"
-            description="We may collect contact, order, shipping, and communication details needed to support purchases, appointments, and customer service."
+            description="We collect the details needed to serve you properly, including name, email, phone number, shipping address, order history, and any sizing or styling information you choose to share."
           />
         </ContentPanel>
         <ContentPanel>
           <SectionTitle
             eyebrow="Usage"
             title="How the information is used"
-            description="Information is used to process orders, manage support requests, improve service experience, and communicate relevant updates."
+            description="Your information is used to process purchases, coordinate delivery, respond to support queries, schedule consultations, and share order-related updates. We do not sell personal information to outside parties."
           />
         </ContentPanel>
       </section>

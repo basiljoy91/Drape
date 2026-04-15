@@ -1,5 +1,13 @@
-import { ContentPanel, FormField, PageHero, SectionTitle } from "../../components/brand-ui";
+import { ContentPanel, PageHero, SectionTitle } from "../../components/brand-ui";
+import { ContactInquiryForm } from "../../components/contact-inquiry-form";
 import { SiteFrame } from "../../components/site-frame";
+import { createMetadata } from "../../lib/metadata";
+
+export const metadata = createMetadata({
+  title: "Contact",
+  description: "Contact Drape for bridal appointments, styling support, and customer care.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
@@ -30,14 +38,7 @@ export default function ContactPage() {
             title="Send a message"
             description="A standard premium store should make contact easy from any stage of the shopping journey."
           />
-          <form className="newsletter-form">
-            <FormField label="Full Name" placeholder="Enter your name" />
-            <FormField label="Email Address" type="email" placeholder="Enter your email" />
-            <FormField label="Message" placeholder="Tell us what you need help with" textarea />
-            <button type="submit" className="cta-button">
-              Send Inquiry
-            </button>
-          </form>
+          <ContactInquiryForm />
         </ContentPanel>
       </section>
     </SiteFrame>

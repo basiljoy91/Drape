@@ -1,7 +1,14 @@
 import { PageHero } from "../../components/brand-ui";
 import { ProductBrowser } from "../../components/product-browser";
 import { SiteFrame } from "../../components/site-frame";
+import { createMetadata } from "../../lib/metadata";
 import { categories, products } from "../../lib/site-data";
+
+export const metadata = createMetadata({
+  title: "Search",
+  description: "Search the Drape catalog by product, color, fabric, price, and occasion.",
+  path: "/search",
+});
 
 export default async function SearchPage({
   searchParams,
