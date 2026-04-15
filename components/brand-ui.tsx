@@ -1,41 +1,20 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import type { NavItem } from "../lib/site-data";
 
-type LinkItem = {
-  label: string;
-  href: string;
-};
-
-type ProductCardProps = {
-  title: string;
-  subtitle: string;
-  price: string;
-  image: string;
-};
-
-type FilterBadgeProps = {
-  label: string;
-  active?: boolean;
-};
-
-type FormFieldProps = {
-  label: string;
-  type?: string;
-  placeholder: string;
-};
-
-export function UtilityBar({ links }: { links: LinkItem[] }) {
+export function UtilityBar({ links }: { links: NavItem[] }) {
   return (
     <div className="utility-bar">
       <div className="shell utility-inner">
         <div className="utility-links">
           {links.map((link) => (
-            <a key={link.label} href={link.href}>
+            <Link key={link.label} href={link.href}>
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
         <div className="utility-meta">
@@ -47,7 +26,7 @@ export function UtilityBar({ links }: { links: LinkItem[] }) {
   );
 }
 
-export function SiteHeader({ navigation }: { navigation: LinkItem[] }) {
+export function SiteHeader({ navigation }: { navigation: NavItem[] }) {
   return (
     <header className="site-header shell">
       <div className="site-toolbar">
@@ -57,7 +36,9 @@ export function SiteHeader({ navigation }: { navigation: LinkItem[] }) {
         </div>
         <div className="brand-lockup">
           <p className="brand-kicker">House of Modern Occasionwear</p>
-          <h1 className="brand-name">Drape</h1>
+          <Link href="/" className="brand-name brand-link">
+            Drape
+          </Link>
           <p className="brand-monogram">DR</p>
         </div>
         <div className="header-icons header-icons-right">
@@ -69,12 +50,21 @@ export function SiteHeader({ navigation }: { navigation: LinkItem[] }) {
 
       <nav className="primary-nav">
         {navigation.map((item) => (
-          <a key={item.label} href={item.href}>
+          <Link key={item.label} href={item.href}>
             {item.label}
-          </a>
+          </Link>
         ))}
       </nav>
     </header>
+  );
+}
+
+export function SiteChrome({ children }: { children: ReactNode }) {
+  return (
+    <main className="brand-page">
+      {children}
+      <SiteFooter />
+    </main>
   );
 }
 
@@ -96,9 +86,39 @@ export function SectionTitle({
   );
 }
 
-export function ProductCard({ title, subtitle, price, image }: ProductCardProps) {
+export function PageHero({
+  eyebrow,
+  title,
+  description,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+}) {
   return (
-    <article className="product-card">
+    <section className="shell page-hero">
+      <SectionTitle eyebrow={eyebrow} title={title} description={description} />
+    </section>
+  );
+}
+
+export function ProductCard({
+  title,
+  subtitle,
+  price,
+  image,
+  href,
+  view = "grid",
+}: {
+  title: string;
+  subtitle: string;
+  price: string;
+  image: string;
+  href: string;
+  view?: "grid" | "list";
+}) {
+  return (
+    <Link href={href} className={`product-card${view === "list" ? " product-card-list" : ""}`}>
       <div className="product-media">
         <Image src={image} alt={title} fill sizes="(max-width: 720px) 100vw, 25vw" />
       </div>
@@ -107,23 +127,69 @@ export function ProductCard({ title, subtitle, price, image }: ProductCardProps)
         <h3>{title}</h3>
         <Badge>{price}</Badge>
       </div>
-    </article>
+    </Link>
   );
 }
 
-export function FilterBadge({ label, active = false }: FilterBadgeProps) {
-  return <button className={`filter-badge${active ? " is-active" : ""}`}>{label}</button>;
+export function CategoryCard({
+  name,
+  description,
+  image,
+  href,
+}: {
+  name: string;
+  description: string;
+  image: string;
+  href: string;
+}) {
+  return (
+    <Link href={href} className="category-card">
+      <div className="category-media">
+        <Image src={image} alt={name} fill sizes="(max-width: 720px) 100vw, 33vw" />
+      </div>
+      <div className="category-copy">
+        <h3>{name}</h3>
+        <p>{description}</p>
+      </div>
+    </Link>
+  );
+}
+
+export function FilterBadge({
+  label,
+  active = false,
+  onClick,
+}: {
+  label: string;
+  active?: boolean;
+  onClick?: () => void;
+}) {
+  return (
+    <button type="button" className={`filter-badge${active ? " is-active" : ""}`} onClick={onClick}>
+      {label}
+    </button>
+  );
 }
 
 export function Badge({ children }: { children: ReactNode }) {
   return <span className="price-badge">{children}</span>;
 }
 
-export function FormField({ label, type = "text", placeholder }: FormFieldProps) {
+export function FormField({
+  label,
+  type = "text",
+  placeholder,
+  textarea = false,
+}: {
+  label: string;
+  type?: string;
+  placeholder: string;
+  textarea?: boolean;
+}) {
   return (
     <label className="form-field">
       <span>{label}</span>
-      <input type={type} placeholder={placeholder} />
+      {textarea ? <textarea placeholder={placeholder} rows={5} /> : <input type={type} placeholder={placeholder} />}
     </label>
   );
 }
@@ -147,47 +213,43 @@ export function NewsletterCard() {
   );
 }
 
-export function SiteFooter() {
+export function JournalCard({
+  title,
+  excerpt,
+  image,
+  date,
+}: {
+  title: string;
+  excerpt: string;
+  image: string;
+  date: string;
+}) {
   return (
-    <footer className="site-footer">
-      <div className="shell footer-grid">
-        <div className="footer-column footer-brand">
-          <p className="footer-logo">Drape</p>
-          <p>
-            Premium Indian occasionwear shaped through rich textiles, warm luxury, and a refined
-            ceremonial storefront.
-          </p>
-        </div>
-        <div className="footer-column">
-          <h3>Shop</h3>
-          <a href="#">Sarees</a>
-          <a href="#">Bridal</a>
-          <a href="#">Blouses</a>
-          <a href="#">Accessories</a>
-        </div>
-        <div className="footer-column">
-          <h3>About</h3>
-          <a href="#">Brand Story</a>
-          <a href="#">Craftsmanship</a>
-          <a href="#">Journal</a>
-          <a href="#">Contact</a>
-        </div>
-        <div className="footer-column">
-          <h3>Support</h3>
-          <a href="#">Shipping</a>
-          <a href="#">Returns</a>
-          <a href="#">Appointments</a>
-          <a href="#">FAQ</a>
-        </div>
+    <article className="journal-card">
+      <div className="journal-media">
+        <Image src={image} alt={title} fill sizes="(max-width: 720px) 100vw, 33vw" />
       </div>
-    </footer>
+      <div className="journal-copy">
+        <span className="product-subtitle">{date}</span>
+        <h3>{title}</h3>
+        <p>{excerpt}</p>
+      </div>
+    </article>
   );
+}
+
+export function ContentPanel({ children }: { children: ReactNode }) {
+  return <section className="content-panel">{children}</section>;
 }
 
 export function HeroPortraits({
   items,
+  showLabels = true,
+  showStamp = true,
 }: {
   items: Array<{ title: string; image: string }>;
+  showLabels?: boolean;
+  showStamp?: boolean;
 }) {
   return (
     <section className="hero-gallery">
@@ -208,10 +270,47 @@ export function HeroPortraits({
               sizes="(max-width: 720px) 100vw, 22vw"
             />
           </div>
-          <span>{item.title}</span>
+          {showLabels ? <span>{item.title}</span> : null}
         </motion.article>
       ))}
-      <div className="hero-stamp">Drape Signature Edit</div>
+      {showStamp ? <div className="hero-stamp">Drape Signature Edit</div> : null}
     </section>
+  );
+}
+
+export function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <div className="shell footer-grid">
+        <div className="footer-column footer-brand">
+          <p className="footer-logo">Drape</p>
+          <p>
+            Premium Indian occasionwear shaped through rich textiles, warm luxury, and a refined
+            ceremonial storefront.
+          </p>
+        </div>
+        <div className="footer-column">
+          <h3>Shop</h3>
+          <Link href="/categories/sarees">Sarees</Link>
+          <Link href="/categories/bridal">Bridal</Link>
+          <Link href="/categories/blouses">Blouses</Link>
+          <Link href="/categories/accessories">Accessories</Link>
+        </div>
+        <div className="footer-column">
+          <h3>Explore</h3>
+          <Link href="/about">About</Link>
+          <Link href="/journal">Journal</Link>
+          <Link href="/faq">FAQ</Link>
+          <Link href="/contact">Contact</Link>
+        </div>
+        <div className="footer-column">
+          <h3>Policies</h3>
+          <Link href="/privacy-policy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
+          <Link href="/shipping">Shipping</Link>
+          <Link href="/returns">Returns</Link>
+        </div>
+      </div>
+    </footer>
   );
 }

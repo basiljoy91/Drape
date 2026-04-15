@@ -2,179 +2,332 @@
 
 import { motion } from "framer-motion";
 import {
+  Badge,
+  CategoryCard,
+  ContentPanel,
   FilterBadge,
   HeroPortraits,
+  JournalCard,
   NewsletterCard,
   ProductCard,
   SectionTitle,
-  SiteFooter,
-  SiteHeader,
-  UtilityBar,
 } from "./brand-ui";
-
-const utilityLinks = [
-  { label: "Orders", href: "#" },
-  { label: "Billing", href: "#" },
-  { label: "Store Policy", href: "#" },
-  { label: "Appointments", href: "#" },
-  { label: "Contact", href: "#" },
-];
-
-const navigation = [
-  { label: "Home", href: "#" },
-  { label: "New Arrivals", href: "#" },
-  { label: "Sarees", href: "#" },
-  { label: "Bridal", href: "#" },
-  { label: "Blouses", href: "#" },
-  { label: "Accessories", href: "#" },
-  { label: "Journal", href: "#" },
-];
+import { categories, journalPosts, products } from "../lib/site-data";
 
 const heroItems = [
   {
     title: "Ivory Ceremony",
-    image:
-      "https://images.unsplash.com/photo-1610189020382-6688c0f708c5?auto=format&fit=crop&w=1200&q=80",
+    image: "/catalog/11.jpg",
   },
   {
     title: "Gold Loom",
-    image:
-      "https://images.unsplash.com/photo-1610030469668-710c1c9067cb?auto=format&fit=crop&w=1200&q=80",
+    image: "/catalog/14.jpg",
   },
   {
     title: "Rose Drape",
-    image:
-      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=80",
+    image: "/catalog/20.jpg",
   },
   {
     title: "Festive Ruby",
-    image:
-      "https://images.unsplash.com/photo-1583391733981-849840c5a0d6?auto=format&fit=crop&w=1200&q=80",
+    image: "/catalog/1.jpg",
   },
 ];
 
-const products = [
+const newArrivals = [
   {
-    title: "Banarasi Ivory Bloom",
-    subtitle: "Heirloom Saree",
-    price: "INR 18,900",
-    image:
-      "https://images.unsplash.com/photo-1610030469678-8c5f6c86b2d2?auto=format&fit=crop&w=900&q=80",
+    title: "Twilight Veil",
+    subtitle: "New Arrival",
+    price: "INR 16,800",
+    image: "/catalog/17.jpg",
+    href: "/product/gulnaar-zari-veil",
   },
   {
-    title: "Peony Silk Drape",
-    subtitle: "Occasion Saree",
-    price: "INR 14,400",
-    image:
-      "https://images.unsplash.com/photo-1610030469132-99d6e4dd98ec?auto=format&fit=crop&w=900&q=80",
+    title: "Rose Court Blouse",
+    subtitle: "New Arrival",
+    price: "INR 7,400",
+    image: "/catalog/7.jpg",
+    href: "/product/rose-court-blouse",
   },
   {
-    title: "Marigold Edit Blouse",
-    subtitle: "Statement Blouse",
-    price: "INR 6,200",
-    image:
-      "https://images.unsplash.com/photo-1594633313593-bab3825d0caf?auto=format&fit=crop&w=900&q=80",
+    title: "Golden Vermilion",
+    subtitle: "New Arrival",
+    price: "INR 21,300",
+    image: "/catalog/14.jpg",
+    href: "/product/golden-vermilion-heritage",
   },
   {
-    title: "Saffron Wedding Weave",
-    subtitle: "Bridal Highlight",
-    price: "INR 24,500",
-    image:
-      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80",
+    title: "Peach Temple",
+    subtitle: "New Arrival",
+    price: "INR 12,800",
+    image: "/catalog/17.jpg",
+    href: "/product/peach-temple-mist",
   },
 ];
 
-const principles = [
+const testimonials = [
   {
-    title: "Palette",
-    text: "Maroon, cream, muted gold, soft parchment surfaces, and warm text contrast.",
+    quote:
+      "The site finally feels like a premium boutique. The bridal edit and product storytelling make the collection feel valuable before checkout.",
+    name: "Rhea Menon",
+    role: "Bridal Client",
   },
   {
-    title: "Typography",
-    text: "Cormorant Garamond for luxury headlines, Manrope for polished readable interface copy.",
+    quote:
+      "Drape now reads like a real fashion house, not a template. The category flow, support pages, and homepage depth feel production-ready.",
+    name: "Nikita Shah",
+    role: "Styling Consultant",
   },
   {
-    title: "Components",
-    text: "Buttons, badges, forms, cards, nav, section titles, and footer now share one design language.",
+    quote:
+      "The warm maroon and cream language carries beautifully across every section. It feels focused, premium, and editorial.",
+    name: "Aarav Khanna",
+    role: "Brand Partner",
+  },
+];
+
+const galleryImages = [
+  "/catalog/1.jpg",
+  "/catalog/10.jpg",
+  "/catalog/14.jpg",
+  "/catalog/17.jpg",
+  "/catalog/20.jpg",
+];
+
+const promises = [
+  {
+    title: "Assured Authenticity",
+    text: "Premium materials, rich finishing, and a brand presentation designed to feel trustworthy.",
+  },
+  {
+    title: "Shipping Support",
+    text: "Clear delivery and dispatch expectations for occasionwear timelines and important dates.",
+  },
+  {
+    title: "Concierge Care",
+    text: "Styling help, pre-purchase guidance, and support paths that keep the storefront usable.",
   },
 ];
 
 export function AtelierHome() {
   return (
-    <main className="brand-page">
-      <UtilityBar links={utilityLinks} />
-      <SiteHeader navigation={navigation} />
-
-      <section className="shell hero-section">
-        <div className="hero-copy">
-          <SectionTitle
-            eyebrow="Brand Foundation"
-            title="Drape now has a real premium design system."
-            description="Phase 1 establishes the visual rules, reusable components, and luxury storefront foundation for every future page."
-          />
-          <div className="filter-row">
-            <FilterBadge label="Maroon Luxe" active />
-            <FilterBadge label="Cream Paper" />
-            <FilterBadge label="Gold Detail" />
-            <FilterBadge label="Arch Frames" />
-          </div>
-          <div className="principles-grid">
-            {principles.map((item) => (
-              <article key={item.title} className="principle-card">
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
+    <>
+      <section className="shell visual-hero-shell">
+        <div className="hero-desktop-visual">
+          <HeroPortraits items={heroItems} showLabels={false} showStamp={false} />
         </div>
-
-        <HeroPortraits items={heroItems} />
+        <div className="hero-mobile-visual">
+          <img src="/catalog/brand-campaign.jpg" alt="Drape campaign hero" />
+        </div>
       </section>
 
       <section className="shell products-section">
         <div className="section-row">
           <SectionTitle
-            eyebrow="Reusable Cards"
-            title="Foundational product blocks for every collection page."
-            description="These shared product cards establish image treatment, copy hierarchy, pricing badges, and hover behavior for the rest of the storefront."
+            eyebrow="Featured Collections"
+            title="Signature edits"
+            description="Curated pieces from the house."
           />
         </div>
 
         <div className="product-grid">
-          {products.map((product, index) => (
+          {products.slice(0, 4).map((product, index) => (
             <motion.div
-              key={product.title}
+              key={product.slug}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: index * 0.08 }}
             >
-              <ProductCard {...product} />
+              <ProductCard {...product} href={`/product/${product.slug}`} />
             </motion.div>
           ))}
         </div>
       </section>
 
-      <section className="shell foundation-grid">
-        <div className="foundation-panel">
+      <section className="shell campaign-attraction">
+        <div className="campaign-copy">
           <SectionTitle
-            eyebrow="System Rules"
-            title="What Phase 1 now standardizes."
-            description="This makes the next phases easier because every new page can reuse the same luxury patterns instead of inventing new UI each time."
+            eyebrow="Brand Attraction"
+            title="Campaign highlight"
+            description="A branded moment between the shop edits."
+          />
+          <div className="showcase-copy">
+            <Badge>Campaign Highlight</Badge>
+          </div>
+        </div>
+        <div className="campaign-art">
+          <img src="/catalog/brand-campaign.jpg" alt="Drape campaign composition" />
+        </div>
+      </section>
+
+      <section className="shell split-showcase">
+        <ContentPanel>
+          <SectionTitle
+            eyebrow="Bridal Spotlight"
+            title="Bridal spotlight"
+            description="Wedding and ceremony edits."
+          />
+          <div className="showcase-copy">
+            <Badge>Bridal Capsule</Badge>
+          </div>
+        </ContentPanel>
+        <div className="showcase-media">
+          <img src="/catalog/10.jpg" alt="Bridal spotlight" />
+        </div>
+      </section>
+
+      <section className="shell products-section">
+        <SectionTitle
+          eyebrow="New Arrivals"
+          title="New arrivals"
+          description="Fresh pieces this week."
+        />
+        <div className="product-grid">
+          {newArrivals.map((item) => (
+            <ProductCard key={item.title} {...item} />
+          ))}
+        </div>
+      </section>
+
+      <section className="shell split-showcase split-showcase-reverse">
+        <div className="showcase-media">
+          <img src="/catalog/20.jpg" alt="Occasion wear spotlight" />
+        </div>
+        <ContentPanel>
+          <SectionTitle
+            eyebrow="Occasion Wear"
+            title="Occasion wear"
+            description="Reception, festive, and family dressing."
+          />
+          <div className="filter-row">
+            <FilterBadge label="Reception" active />
+            <FilterBadge label="Festive" />
+            <FilterBadge label="Family Events" />
+          </div>
+        </ContentPanel>
+      </section>
+
+      <section className="shell products-section">
+        <SectionTitle
+          eyebrow="Best Sellers"
+          title="Best sellers"
+          description="Most loved pieces."
+        />
+        <div className="product-grid">
+          {products.slice(2, 6).map((product) => (
+            <ProductCard key={product.slug} {...product} href={`/product/${product.slug}`} />
+          ))}
+        </div>
+      </section>
+
+      <section className="shell category-section">
+        <SectionTitle
+          eyebrow="Categories"
+          title="Shop by category"
+          description="Sarees, bridal, blouses, men, accessories."
+        />
+        <div className="category-grid">
+          {categories.map((category) => (
+            <CategoryCard
+              key={category.slug}
+              name={category.name}
+              description={category.description}
+              image={category.hero}
+              href={`/categories/${category.slug}`}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="shell artisan-section">
+        <div className="craft-image-panel">
+          <img src="/catalog/11.jpg" alt="Craftsmanship detail" />
+        </div>
+        <ContentPanel>
+          <SectionTitle
+            eyebrow="Craftsmanship"
+            title="Craftsmanship"
+            description="Silk, zari, finish, and drape."
+          />
+        </ContentPanel>
+        <ContentPanel>
+          <SectionTitle
+            eyebrow="Store Promise"
+            title="Store promise"
+            description="Authenticity, delivery, and concierge support."
+          />
+          <div className="promise-grid">
+            {promises.map((item) => (
+              <article key={item.title} className="promise-card">
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </ContentPanel>
+      </section>
+
+      <section className="shell testimonials-section">
+        <SectionTitle
+          eyebrow="Testimonials"
+          title="Client notes"
+          description="A few words from shoppers."
+        />
+        <div className="testimonial-grid">
+          {testimonials.map((item) => (
+            <article key={item.name} className="testimonial-card">
+              <p className="testimonial-quote">“{item.quote}”</p>
+              <strong>{item.name}</strong>
+              <span>{item.role}</span>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="shell foundation-grid">
+        <ContentPanel>
+          <SectionTitle
+            eyebrow="Brand Pages"
+            title="About, contact, FAQ, and policy pages now fit the same system."
+            description="Support, story, and trust-building pages use the same premium spacing, copy hierarchy, and panel language as commerce pages."
           />
           <ul className="foundation-list">
-            <li>Shared header and navigation structure</li>
-            <li>Standard footer columns and support links</li>
-            <li>Luxury card, badge, and surface treatment</li>
-            <li>Consistent spacing, borders, and form styling</li>
-            <li>Brand naming updated to Drape</li>
+            <li>About and journal pages strengthen the brand story</li>
+            <li>Contact and FAQ pages improve usability and trust</li>
+            <li>Privacy, terms, shipping, and returns create standard ecommerce coverage</li>
           </ul>
-        </div>
+        </ContentPanel>
 
         <NewsletterCard />
       </section>
 
-      <SiteFooter />
-    </main>
+      <section className="shell gallery-section">
+        <SectionTitle
+          eyebrow="Instagram / Gallery"
+          title="Gallery"
+          description="Latest visual moments."
+        />
+        <div className="gallery-grid">
+          {galleryImages.map((image, index) => (
+            <div key={image} className={`gallery-tile gallery-tile-${(index % 5) + 1}`}>
+              <img src={image} alt={`Drape gallery ${index + 1}`} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="shell journal-section">
+        <SectionTitle
+          eyebrow="Journal"
+          title="Journal"
+          description="Style notes and stories."
+        />
+        <div className="journal-grid">
+          {journalPosts.map((post) => (
+            <JournalCard key={post.slug} {...post} />
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
