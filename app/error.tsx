@@ -20,7 +20,7 @@ export default function Error({
         <div className="content-panel status-panel">
           <span className="section-eyebrow">Something Went Wrong</span>
           <h1 className="status-title">The page hit an unexpected issue.</h1>
-          <p>Please try again or return to the storefronto.</p>
+          <p>Please try again or return to the storefront.</p>
           <div className="product-cta-row">
             <button className="cta-button" onClick={reset}>
               Try Again
