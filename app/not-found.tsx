@@ -14,7 +14,7 @@ export default function NotFound() {
               Go Home
             </Link>
             <Link href="/collections" className="secondary-button">
-              Browse Colle
+              Browse Coll
             </Link>
           </div>
         </div>
